@@ -86,6 +86,22 @@ fn main() {
     let map2 = "Map to hidden Gold";
     let chosen_map = longest_map(map1, map2);
 
+    // 7. Structs
+    let mut crabby = Crabby {
+        name: "Crabby".to_string(),
+        health: 100,
+    };
+
+    crabby.take_damage(50);
+    println!("{}'s health after taking damage: {}", crabby.name, crabby.health);
+    crabby.healing(70);
+    println!("{}'s health after healing: {}", crabby.name, crabby.health);
+
+    crabby.take_damage(100);
+    crabby.take_damage(20);
+    println!("{}'s health after taking damage: {}", crabby.name, crabby.health);
+    crabby.healing(60);
+    println!("{}'s health after healing: {}", crabby.name, crabby.health);
 
     
 }
@@ -113,5 +129,25 @@ fn longest_map<'a>(map1: &'a str, map2: &'a str) -> &'a str {
         map1
     } else {
         map2
+    }
+}
+
+// 7. Structs
+struct Crabby {
+    name: String,
+    health: u8,
+}
+
+impl Crabby {
+    fn take_damage(&mut self, damage: u8) {
+        self.health = self.health.saturating_sub(damage);
+    }
+
+    fn healing(&mut self, heal: u8) {
+        if self.health + heal >= 100 {
+            self.health = 100;
+            return;
+        }
+        self.health += heal;
     }
 }
