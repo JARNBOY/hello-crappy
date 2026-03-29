@@ -103,7 +103,15 @@ fn main() {
     crabby.healing(60);
     println!("{}'s health after healing: {}", crabby.name, crabby.health);
 
-    
+    // 8. Enums
+    let figthing_state = CrabbyState::Figting;
+    let collecting_state = CrabbyState::Collecting(50);
+    let defending_state = CrabbyState::Defending;
+
+    figthing_state.state_represent();
+    collecting_state.state_represent();
+    defending_state.state_represent();
+
 }
 
 // 4. Functions
@@ -149,5 +157,22 @@ impl Crabby {
             return;
         }
         self.health += heal;
+    }
+}
+
+// 8. Enums
+enum CrabbyState {
+    Figting,
+    Collecting(u32),
+    Defending,
+}
+
+impl CrabbyState {
+    fn state_represent(&self) {
+        match self {
+            CrabbyState::Figting => println!("Crabby is in fighting mode!"),
+            CrabbyState::Collecting(coins) => println!("Crabby is collecting {} coins.", coins),
+            CrabbyState::Defending => println!("Crabby is in defending mode!"),
+        }
     }
 }
