@@ -112,6 +112,14 @@ fn main() {
     collecting_state.state_represent();
     defending_state.state_represent();
 
+    // 9. Traits
+    let gold: Inventory<i32> = Inventory { item: 100 };
+    gold.display();
+
+    let sword: Inventory<&str> = Inventory { item: "Sword" };
+    sword.display();
+
+
 }
 
 // 4. Functions
@@ -174,5 +182,22 @@ impl CrabbyState {
             CrabbyState::Collecting(coins) => println!("Crabby is collecting {} coins.", coins),
             CrabbyState::Defending => println!("Crabby is in defending mode!"),
         }
+    }
+}
+
+// 9. Traits
+struct Inventory<T> {
+    item: T,
+}
+
+trait DisplayItem {
+    fn display(&self);
+}
+
+impl<T> DisplayItem for Inventory<T> 
+where T: std::fmt::Debug,
+{
+    fn display(&self) {
+        println!("{:?}", self.item);
     }
 }
