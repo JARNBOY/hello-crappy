@@ -119,6 +119,15 @@ fn main() {
     let sword: Inventory<&str> = Inventory { item: "Sword" };
     sword.display();
 
+    // 10. String vs &str
+    let map: String = String::from("Old map");
+    let borrow_map: &str = map.as_str();
+    let mut crabby_new_map: String = borrow_map.to_string();
+    crabby_new_map.push_str(" to new map");
+    println!("Original map: {}", map);
+    println!("Borrowed map: {}", borrow_map);
+    println!("Crabby's map: {}", crabby_new_map);
+
 
 }
 
