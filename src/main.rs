@@ -1,4 +1,4 @@
-use std::fmt::format;
+use std::{fmt::format, vec};
 
 fn main() {
     println!("Hello, world!");
@@ -150,6 +150,31 @@ fn main() {
         energy -= 1;
     }
 
+    // 12. Vector -> like flexible array
+
+    // case add items ก่อน ทำให้ capacity เพิ่มขึ้น
+    let mut items = vec!["Gold", "Silver", "Bronze", "Ruby Gem"];
+    items.push("Emerald");
+    println!("Crabby's inventory items: {:?}", items);
+    println!("Crabby's inventory items: {:?}", items.len());
+    println!("Crabby's inventory items: {:?}", items.capacity());
+
+    items.remove(1);
+    println!("Crabby's inventory items: {:?}", items);
+    println!("Crabby's inventory items: {:?}", items.len());
+    println!("Crabby's inventory items: {:?}", items.capacity());
+
+    // case remove items ก่อน ทำให้ capacity ไม่เปลี่ยนแปลง ถ้า size ของ vector ยังไม่ถึง capacity
+    let mut items2 = vec!["Gold", "Silver", "Bronze", "Ruby Gem"];
+    items2.remove(1);
+    println!("Crabby's inventory items: {:?}", items2);
+    println!("Crabby's inventory items: {:?}", items2.len());
+    println!("Crabby's inventory items: {:?}", items2.capacity());
+
+    items2.push("Emerald");
+    println!("Crabby's inventory items: {:?}", items2);
+    println!("Crabby's inventory items: {:?}", items2.len());
+    println!("Crabby's inventory items: {:?}", items2.capacity());
 
 
 }
