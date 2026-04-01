@@ -128,6 +128,29 @@ fn main() {
     println!("Borrowed map: {}", borrow_map);
     println!("Crabby's map: {}", crabby_new_map);
 
+    // 11. Loop
+    // Loop Control Recap
+//  • loop : Infinite looping
+//  • while : Repeat while a condition is true.
+//  • for : Iterate over collections or ranges effortlessly.
+//  • break : Exit the loop early when the job is done.
+//  • continue : Skip over specific items in the loop.
+    let treasures = ["Gold", "Silver", "Ruby Gem", "Emerald"];
+    let mut energy = 5;
+
+    for treasure in treasures.iter() {
+        if energy == 0 {
+            println!("Crabby is too tired to continue, Game over.");
+            break;
+        } else if treasure == &"Ruby Gem" {
+            println!("Crabby found a Ruby Gem! It's too heavy to carry, so he leaves it behind, You win!");
+            break;
+        }
+        println!("Crabby found a {}!", treasure);
+        energy -= 1;
+    }
+
+
 
 }
 
