@@ -1,4 +1,4 @@
-use std::{fmt::format, vec};
+use std::collections::HashMap;
 
 fn main() {
     println!("Hello, world!");
@@ -181,6 +181,19 @@ fn main() {
     let double_treasures: Vec<i32> = treasures.iter().map(|x: &i32| x * 2).collect();
     println!("Crabby's treasures: {:?}", double_treasures);
 
+    // 14. HashMap: Key Value
+    let mut treasures: HashMap<&str, i32> = HashMap::new();
+    treasures.insert("Gold", 100);
+    treasures.insert("Silver", 50);
+    treasures.insert("Ruby Gem", 200);
+    treasures.insert("Emerald", 400);
+    
+    println!("treasures 14: {:?}:", treasures);
+    
+    if let Some(golds) = treasures.get_mut("Gold") {
+        *golds += 50;
+    }
+    println!("treasures 14: {:?}:", treasures);
 
 }
 
