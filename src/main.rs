@@ -176,6 +176,11 @@ fn main() {
     println!("Crabby's inventory items: {:?}", items2.len());
     println!("Crabby's inventory items: {:?}", items2.capacity());
 
+    // 13. Iterators & Closures: ทางลัดในวังวนของ crabby
+    let treasures = vec![100, 50, 200, 400];
+    let double_treasures: Vec<i32> = treasures.iter().map(|x: &i32| x * 2).collect();
+    println!("Crabby's treasures: {:?}", double_treasures);
+
 
 }
 
