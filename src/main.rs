@@ -1,3 +1,4 @@
+use core::panic;
 use std::collections::HashMap;
 
 fn main() {
@@ -195,6 +196,33 @@ fn main() {
     }
     println!("treasures 14: {:?}:", treasures);
 
+    // 15. Error Handling: Rust
+    let chest_result: String = match open_chest(true) {
+        Some(treasure) => treasure,
+        None => "The chest is empty.".to_string(),
+    };
+    println!("{}", chest_result);
+
+    let chest_found_result: String = match open_chest(false) {
+        Some(treasure) => treasure,
+        None => "The chest is empty.".to_string(),
+    };
+    println!("{}", chest_found_result);
+
+
+    let door_safe_result: String = match open_door(false) {
+        Ok(safe) => safe,
+        Err(error) => panic!("{}", error),
+    };
+    println!("{}", door_safe_result);
+    
+    let door_result: String = match open_door(true) {
+        Ok(safe) => safe,
+        Err(error) => panic!("{}", error),
+    };
+    println!("{}", door_result);
+
+
 }
 
 // 4. Functions
@@ -276,3 +304,21 @@ where T: std::fmt::Debug,
         println!("{:?}", self.item);
     }
 }
+
+// 15. Error Handling: Rust
+fn open_chest(is_empty: bool) -> Option<String> {
+    if is_empty {
+        None
+    } else {
+        Some("You found a treasure!".to_string())
+    }
+}
+
+fn open_door(is_danger: bool) -> Result<String, String> {
+    if is_danger {
+        Err("A monster is behind the door!".to_string())
+    } else {
+        Ok("The door is safe to open.".to_string())
+    }
+}
+
