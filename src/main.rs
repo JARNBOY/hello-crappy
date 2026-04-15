@@ -1,5 +1,6 @@
 use core::panic;
 use std::collections::HashMap;
+use std::{cell::RefCell, rc::Rc};
 
 fn main() {
     println!("Hello, world!");
@@ -216,12 +217,29 @@ fn main() {
     };
     println!("{}", door_safe_result);
     
-    let door_result: String = match open_door(true) {
-        Ok(safe) => safe,
-        Err(error) => panic!("{}", error),
-    };
-    println!("{}", door_result);
+    // let door_result: String = match open_door(true) {
+    //     Ok(safe) => safe,
+    //     Err(error) => panic!("{}", error),
+    // };
+    // println!("{}", door_result);
 
+    // 16. Smart Pointers: Box<T>, Rc<T>, RefCell<T>
+    /// Style 1:
+     let chest = Box::new(10);
+     let shared_chest = Rc::new(RefCell::new(chest));
+
+     **shared_chest.borrow_mut() += 5;
+     println!("Shared chest value: {}", shared_chest.borrow());
+     **shared_chest.borrow_mut() += 10;
+     println!("Shared chest value: {}", shared_chest.borrow());
+     /// Style 2 in real case:
+     let chest2 = 10;
+     let shared_chest2 = Rc::new(RefCell::new(chest2));
+
+     *shared_chest2.borrow_mut() += 5;
+     println!("Shared chest 2 value: {}", shared_chest2.borrow());
+     *shared_chest2.borrow_mut() += 10;
+     println!("Shared chest 2 value: {}", shared_chest2.borrow());
 
 }
 
