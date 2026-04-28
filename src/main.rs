@@ -1,6 +1,6 @@
 use core::panic;
 use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
+use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::{cell::RefCell, rc::Rc};
 
@@ -284,6 +284,28 @@ fn main() {
      loot_3.join().unwrap();
 
      println!("Gold {}", crabby_gold.lock().unwrap());
+
+     // 19. Channels in Rust thread เครือข่ายสื่อสารของ crabby
+     let loots: Vec<i32> = vec![10, 20, 30];
+     let mut crabby_gold_coin:i32 = 100;
+
+     let (sender, receiver) = mpsc::sync_channel(3);
+     let sender_arc = Arc::new(sender);
+
+     for loot in loots.clone().into_iter() {
+        thread::spawn({
+            let sender = Arc::clone(&sender_arc);
+            move || {
+                sender.send(loot).unwrap();
+             }
+        });
+     }
+
+     for _ in 0..loots.len() {
+        let loot = receiver.recv().unwrap();
+        crabby_gold_coin += loot;
+        println!("Crabby received loot: {}, Total gold coin: {}", loot, crabby_gold_coin);
+     }
 
 }
 
